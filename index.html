@@ -1,1 +1,35 @@
-heelo
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>OAuth2 Callback Handler</title>
+    <script type="text/javascript">
+      function getQueryParams() {
+        const params = {};
+        window.location.search
+          .substring(1)
+          .split("&")
+          .forEach(function (part) {
+            const item = part.split("=");
+            params[item[0]] = decodeURIComponent(item[1]);
+          });
+        return params;
+      }
+
+      window.onload = function () {
+        const queryParams = getQueryParams();
+        console.log("Query Parameters:", queryParams);
+
+        // Extract the code and log it
+        if (queryParams["code"]) {
+          console.log("Authorization Code:", queryParams["code"]);
+        } else {
+          console.log("Authorization code not found in the URL");
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <h2>OAuth2 Callback Handler</h2>
+    <p>Check the browser console for the OAuth2 code.</p>
+  </body>
+</html>
